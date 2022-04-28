@@ -1,117 +1,167 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="produto.css" rel="stylesheet" />
     <title>Dalma Leiloes!</title>
-  </head>
-    <body>
+</head>
 
-<div class="container">
-    <!-- product -->
-    <div class="product-content product-wrap clearfix product-deatil">
-        <div class="row">
-            <div class="col-md-5 col-sm-12 col-xs-12">
-                <div class="product-image">
-                    <div id="myCarousel-2" class="carousel slide">
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel-2" data-slide-to="0" class=""></li>
-                            <li data-target="#myCarousel-2" data-slide-to="1" class="active"></li>
-                            <li data-target="#myCarousel-2" data-slide-to="2" class=""></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <!-- Slide 1 -->
-                            <div class="item active">
-                                <img src="https://i.imgur.com/uRgdVY1.jpg" class="img-responsive" alt="" />
+
+
+<body>
+
+    <script>
+
+        function enviaMsg() {
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function () {
+                console.log("readyState:" + this.readyState);
+                console.log("status:" + this.status);
+
+                if (this.readyState == 4 && this.status == 200) {
+                    imprimeResposta(this);
+                }
+            };
+
+            xhttp.onload = function () {
+                document.getElementById("resposta").innerHTML = this.responseText;
+            };
+
+            document.getElementById("saida").innerHTML = "Lance enviado com sucesso!";
+            var data = {
+                "usuario": document.getElementById("usuario").value,
+                "nome": document.getElementById("nome").value,
+                "produto": document.getElementById("produto").value,
+                "lance": document.getElementById("lance").value
+
+            };
+            var jsondata = JSON.stringify(data);
+            var url = "https://fwcxyqr2ol.execute-api.us-east-1.amazonaws.com/DalmaStage3";
+            xhttp.open("POST", url);
+            xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhttp.send(jsondata);
+        }
+
+        function imprimeResposta(xml) {
+            var xmlDoc = xml.responseXML;
+            document.getElementById("resposta").innerHTML = xmlDoc;
+        }
+    </script>
+
+
+    <div class="container">
+        <!-- product -->
+        <div class="product-content product-wrap clearfix product-deatil">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    <div class="product-image">
+                        <div id="myCarousel-2" class="carousel slide">
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel-2" data-slide-to="0" class=""></li>
+                                <li data-target="#myCarousel-2" data-slide-to="1" class="active"></li>
+                                <li data-target="#myCarousel-2" data-slide-to="2" class=""></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <!-- Slide 1 -->
+                                <div class="item active">
+                                    <img src="https://i.imgur.com/uRgdVY1.jpg" class="img-responsive" alt="" />
+                                </div>
                             </div>
+                            <a class="left carousel-control" href="#myCarousel-2" data-slide="prev"> <span
+                                    class="glyphicon glyphicon-chevron-left"></span> </a>
+                            <a class="right carousel-control" href="#myCarousel-2" data-slide="next"> <span
+                                    class="glyphicon glyphicon-chevron-right"></span> </a>
                         </div>
-                        <a class="left carousel-control" href="#myCarousel-2" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
-                        <a class="right carousel-control" href="#myCarousel-2" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-md-offset-1 col-sm-12 col-xs-12">
-                <h2 class="name">
-                    Celular Android
-                    <p>Caixa com 500</p>
-                </h2>
-                <hr />
-                <h3 class="price-container">
-                    R$500,00
-                    <small>*Preço inicial</small>
-                </h3>
-                <hr />
-                <div class="description description-tabs">
-                    <ul id="myTab" class="nav nav-pills">
-                        <li class="active">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non nisl placerat, imperdiet sapien quis, ultricies urna. Donec ullamcorper accumsan sagittis. Etiam vitae ante cursus, bibendum nunc in, ultrices diam. Vestibulum sit amet orci accumsan mi venenatis molestie. Nulla accumsan consequat orci. Aliquam molestie nulla sed lobortis finibus. Aliquam at nisi a lacus fringilla dapibus vel quis odio. Quisque eget metus quis ex convallis dictum sed sit amet tortor. Vestibulum viverra fermentum fringilla. Aenean ultricies mauris metus, at tristique nisi sodales non. Praesent ullamcorper lobortis accumsan. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi dapibus eleifend velit vel aliquet. Vivamus vitae tincidunt nisi. Quisque purus turpis, aliquet ac libero vitae, mollis ultrices lorem.</p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non nisl placerat, imperdiet sapien quis, ultricies urna. Donec ullamcorper accumsan sagittis. Etiam vitae ante cursus, bibendum nunc in, ultrices diam. Vestibulum sit amet orci accumsan mi venenatis molestie. Nulla accumsan consequat orci. Aliquam molestie nulla sed lobortis finibus. Aliquam at nisi a lacus fringilla dapibus vel quis odio. Quisque eget metus quis ex convallis dictum sed sit amet tortor. Vestibulum viverra fermentum fringilla. Aenean ultricies mauris metus, at tristique nisi sodales non. Praesent ullamcorper lobortis accumsan. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi dapibus eleifend velit vel aliquet. Vivamus vitae tincidunt nisi. Quisque purus turpis, aliquet ac libero vitae, mollis ultrices lorem.</li>
-                    </ul>
+                <div class="col-md-6 col-md-offset-1 col-sm-12 col-xs-12">
+                    <h2 class="name">
+                        Celular Android
+                        <p>Caixa com 500</p>
+                    </h2>
+                    <hr />
+                    <h3 class="price-container">
+                        R$500,00
+                        <small>*Preço inicial</small>
+                    </h3>
+                    <hr />
+                    <div class="description description-tabs">
+                        <ul id="myTab" class="nav nav-pills">
+                            <li class="active">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non nisl placerat,
+                                    imperdiet sapien quis, ultricies urna. Donec ullamcorper accumsan sagittis. Etiam
+                                    vitae ante cursus, bibendum nunc in, ultrices diam. Vestibulum sit amet orci
+                                    accumsan mi venenatis molestie. Nulla accumsan consequat orci. Aliquam molestie
+                                    nulla sed lobortis finibus. Aliquam at nisi a lacus fringilla dapibus vel quis odio.
+                                    Quisque eget metus quis ex convallis dictum sed sit amet tortor. Vestibulum viverra
+                                    fermentum fringilla. Aenean ultricies mauris metus, at tristique nisi sodales non.
+                                    Praesent ullamcorper lobortis accumsan. Orci varius natoque penatibus et magnis dis
+                                    parturient montes, nascetur ridiculus mus. Morbi dapibus eleifend velit vel aliquet.
+                                    Vivamus vitae tincidunt nisi. Quisque purus turpis, aliquet ac libero vitae, mollis
+                                    ultrices lorem.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+                                    non nisl placerat, imperdiet sapien quis, ultricies urna. Donec ullamcorper accumsan
+                                    sagittis. Etiam vitae ante cursus, bibendum nunc in, ultrices diam. Vestibulum sit
+                                    amet
+                                    orci accumsan mi venenatis molestie. Nulla accumsan consequat orci. Aliquam molestie
+                                    nulla sed lobortis finibus. Aliquam at nisi a lacus fringilla dapibus vel quis odio.
+                                    Quisque eget metus quis ex convallis dictum sed sit amet tortor. Vestibulum viverra
+                                    fermentum fringilla. Aenean ultricies mauris metus, at tristique nisi sodales non.
+                                    Praesent ullamcorper lobortis accumsan. Orci varius natoque penatibus et magnis dis
+                                    parturient montes, nascetur ridiculus mus. Morbi dapibus eleifend velit vel aliquet.
+                                    Vivamus vitae tincidunt nisi. Quisque purus turpis, aliquet ac libero vitae, mollis
+                                    ultrices lorem.</p>
+                        </ul>
                     </div>
                 </div>
                 <hr />
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6">
-                        <a href="javascript:enviaMsg();" class="btn btn-success btn-lg">Dar um lance</a>
-                        	<td ><LABEL for="bid">Lance:</LABEL>
-	                       <td><INPUT Type = "Text" id="bid" Name="bid" Size="20" MaxLength="50"><BR></INPUT>
-
-
-<br><br><br>
-Resposta:
-<br>
-<span id="resposta">---------</span>
+                        <p id="saida">Preencha os campos para dar um lance</p>
+                        <br>
+                        <table>
+                          <tr>
+                            <td><LABEL for="usuario">Usuario:</LABEL>
+                            <td><INPUT Type="Text" id="usuario" Name="usuario" Size="20" MaxLength="50"><BR></INPUT>
+                          <tr>
+                              <td><LABEL for="nome">Nome:</LABEL>
+                              <td><INPUT Type="Text" id="nome" Name="nome" Size="20" MaxLength="50"><BR></INPUT>
+                          <tr>
+                              <td><LABEL for="produto">Produto:</LABEL>
+                              <td><INPUT Type="Text" id="produto" Name="produto" Size="20" MaxLength="50"><BR></INPUT>
+                          <tr>
+                            <td><LABEL for="lance">Lance:</LABEL>
+                            <td><INPUT Type="Text" id="lance" Name="lance" Size="20" MaxLength="50"><BR></INPUT>
+                        </table>
+                        <br>
+                        <button type="button" onclick="enviaMsg()" class="btn btn-success btn-lg">Dar lance</button>
+                      
+                        <br><br><br>
+                        Resposta:
+                        <br>
+                        <span id="resposta">---------</span>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div class="btn-group pull-right">
-                            <button class="btn btn-white btn-default"><i class="fa fa-envelope"></i> Falar com o vendedor</button>
+                            <button class="btn btn-white btn-default"><i class="fa fa-envelope"></i> Falar com o
+                                vendedor</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        </div>
-    </body>
-    
-    
-                            <script>
+    </div>
+</body>
 
-function enviaMsg() {
-  const xhttp = new XMLHttpRequest();
 
-  xhttp.onreadystatechange = function() {
-    console.log("readyState:" + this.readyState);
-	console.log("status:" + this.status);
-
-    if (this.readyState == 4 && this.status == 200) {
-      imprimeResposta(this);
-    }
-  };
-
-  xhttp.onload = function() {
-    document.getElementById("resposta").innerHTML = this.responseText;
-  };
-
-  document.getElementById("saida").innerHTML = "mensagem enviada";
-  var data = {
-  "bid":document.getElementById("lance").value,
-  "from":document.getElementById("usuario").value};
-  var jsondata = JSON.stringify(data);
-  var url = "https://nv1dg5ejgb.execute-api.us-east-1.amazonaws.com/teste";
-  xhttp.open("POST", url);
-  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhttp.send(jsondata);
-}
-
-function imprimeResposta(xml) {
-  var xmlDoc = xml.responseXML;
-  document.getElementById("resposta").innerHTML = xmlDoc;
-}
-</script>
-
-    
 </html>
