@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<script src="funcoes.js"></script>
 
 <head>
     <meta charset="utf-8">
@@ -38,14 +39,13 @@
 
             document.getElementById("saida").innerHTML = "Lance enviado com sucesso!";
             var data = {
-                "usuario": document.getElementById("usuario").value,
                 "nome": document.getElementById("nome").value,
                 "produto": document.getElementById("produto").value,
                 "lance": document.getElementById("lance").value
 
             };
             var jsondata = JSON.stringify(data);
-            var url = "https://fwcxyqr2ol.execute-api.us-east-1.amazonaws.com/DalmaStage3";
+            var url = "https://oazsir36mb.execute-api.us-east-1.amazonaws.com/DalmaLances";
             xhttp.open("POST", url);
             xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhttp.send(jsondata);
@@ -129,22 +129,19 @@
                         <p id="saida">Preencha os campos para dar um lance</p>
                         <br>
                         <table>
-                          <tr>
-                            <td><LABEL for="usuario">Usuario:</LABEL>
-                            <td><INPUT Type="Text" id="usuario" Name="usuario" Size="20" MaxLength="50"><BR></INPUT>
-                          <tr>
-                              <td><LABEL for="nome">Nome:</LABEL>
-                              <td><INPUT Type="Text" id="nome" Name="nome" Size="20" MaxLength="50"><BR></INPUT>
-                          <tr>
-                              <td><LABEL for="produto">Produto:</LABEL>
-                              <td><INPUT Type="Text" id="produto" Name="produto" Size="20" MaxLength="50"><BR></INPUT>
-                          <tr>
-                            <td><LABEL for="lance">Lance:</LABEL>
-                            <td><INPUT Type="Text" id="lance" Name="lance" Size="20" MaxLength="50"><BR></INPUT>
+                            <tr>
+                                <td><LABEL for="nome">Nome:</LABEL>
+                                <td><INPUT Type="Text" id="nome" Name="nome" Size="20" MaxLength="50"><BR></INPUT>
+                            <tr>
+                                <td><LABEL for="produto">Produto:</LABEL>
+                                <td><INPUT Type="Text" id="produto" Name="produto" Size="20" MaxLength="50"><BR></INPUT>
+                            <tr>
+                                <td><LABEL for="lance">Lance:</LABEL>
+                                <td><INPUT Type="Text" id="lance" Name="lance" Size="20" MaxLength="50"><BR></INPUT>
                         </table>
                         <br>
                         <button type="button" onclick="enviaMsg()" class="btn btn-success btn-lg">Dar lance</button>
-                      
+
                         <br><br><br>
                         Resposta:
                         <br>
